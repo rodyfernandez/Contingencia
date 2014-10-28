@@ -1,0 +1,28 @@
+﻿@model contigencia.Models.ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<h4>Use otro servicio para iniciar sesión.</h4>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0) {
+        <div>
+            <p>
+                No se ha configurado ningún servicio de autenticación externo. Vea <a href="http://go.microsoft.com/fwlink/?LinkId=313242">este artículo</a>
+                para obtener detalles sobre cómo configurar esta aplicación ASP.NET para que admita el inicio de sesión con servicios externos.
+            </p>
+        </div>
+    }
+    else {
+        using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = Model.ReturnUrl })) {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                    @foreach (AuthenticationDescription p in loginProviders) {
+                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Inicie sesión con su cuenta @p.Caption">@p.AuthenticationType</button>
+                    }
+                </p>
+            </div>
+        }
+    }
+}

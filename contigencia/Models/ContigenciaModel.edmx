@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="contingenciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="condiciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="destinatario_persona">
+          <Key>
+            <PropertyRef Name="id_destinatarios" />
+            <PropertyRef Name="id_personas" />
+          </Key>
+          <Property Name="id_destinatarios" Type="int" Nullable="false" />
+          <Property Name="id_personas" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="destinatarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="activo" Type="bit" />
+          <Property Name="id_planescontigencia" Type="int" />
+        </EntityType>
+        <EntityType Name="escenario_condicion">
+          <Key>
+            <PropertyRef Name="id_escenarios" />
+            <PropertyRef Name="id_condiciones" />
+          </Key>
+          <Property Name="id_escenarios" Type="int" Nullable="false" />
+          <Property Name="id_condiciones" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="escenarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="activo" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="instrucciones">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="personas">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="razon_social" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="celular" Type="varchar" MaxLength="50" />
+          <Property Name="compañia" Type="varchar" MaxLength="50" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="plan_escenario">
+          <Key>
+            <PropertyRef Name="id_escenarios" />
+            <PropertyRef Name="id_planescontigencia" />
+          </Key>
+          <Property Name="id_escenarios" Type="int" Nullable="false" />
+          <Property Name="id_planescontigencia" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="plan_instruccion">
+          <Key>
+            <PropertyRef Name="id_planescontigencia" />
+            <PropertyRef Name="id_instrucciones" />
+          </Key>
+          <Property Name="id_planescontigencia" Type="int" Nullable="false" />
+          <Property Name="id_instrucciones" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="planescontingencia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="300" />
+          <Property Name="activo" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_destinatario_persona_destinatarios">
+          <End Role="destinatarios" Type="Self.destinatarios" Multiplicity="1" />
+          <End Role="destinatario_persona" Type="Self.destinatario_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="destinatarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="destinatario_persona">
+              <PropertyRef Name="id_destinatarios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_destinatario_persona_personas">
+          <End Role="personas" Type="Self.personas" Multiplicity="1" />
+          <End Role="destinatario_persona" Type="Self.destinatario_persona" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="personas">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="destinatario_persona">
+              <PropertyRef Name="id_personas" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_destinatarios_planescontingencia">
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="0..1" />
+          <End Role="destinatarios" Type="Self.destinatarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planescontingencia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="destinatarios">
+              <PropertyRef Name="id_planescontigencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_escenario_condicion_condiciones">
+          <End Role="condiciones" Type="Self.condiciones" Multiplicity="1" />
+          <End Role="escenario_condicion" Type="Self.escenario_condicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="condiciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="escenario_condicion">
+              <PropertyRef Name="id_condiciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_escenario_condicion_escenarios">
+          <End Role="escenarios" Type="Self.escenarios" Multiplicity="1" />
+          <End Role="escenario_condicion" Type="Self.escenario_condicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="escenarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="escenario_condicion">
+              <PropertyRef Name="id_escenarios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_escenario_escenarios">
+          <End Role="escenarios" Type="Self.escenarios" Multiplicity="1" />
+          <End Role="plan_escenario" Type="Self.plan_escenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="escenarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_escenario">
+              <PropertyRef Name="id_escenarios" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_escenario_planescontingencia">
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="1" />
+          <End Role="plan_escenario" Type="Self.plan_escenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planescontingencia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_escenario">
+              <PropertyRef Name="id_planescontigencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_instruccion_instrucciones">
+          <End Role="instrucciones" Type="Self.instrucciones" Multiplicity="1" />
+          <End Role="plan_instruccion" Type="Self.plan_instruccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="instrucciones">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_instruccion">
+              <PropertyRef Name="id_instrucciones" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_plan_instruccion_planescontingencia">
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="1" />
+          <End Role="plan_instruccion" Type="Self.plan_instruccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planescontingencia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="plan_instruccion">
+              <PropertyRef Name="id_planescontigencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="contingenciaModelStoreContainer">
+          <EntitySet Name="condiciones" EntityType="Self.condiciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="destinatario_persona" EntityType="Self.destinatario_persona" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="destinatarios" EntityType="Self.destinatarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="escenario_condicion" EntityType="Self.escenario_condicion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="escenarios" EntityType="Self.escenarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="instrucciones" EntityType="Self.instrucciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="personas" EntityType="Self.personas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plan_escenario" EntityType="Self.plan_escenario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="plan_instruccion" EntityType="Self.plan_instruccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="planescontingencia" EntityType="Self.planescontingencia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_destinatario_persona_destinatarios" Association="Self.FK_destinatario_persona_destinatarios">
+            <End Role="destinatarios" EntitySet="destinatarios" />
+            <End Role="destinatario_persona" EntitySet="destinatario_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_destinatario_persona_personas" Association="Self.FK_destinatario_persona_personas">
+            <End Role="personas" EntitySet="personas" />
+            <End Role="destinatario_persona" EntitySet="destinatario_persona" />
+          </AssociationSet>
+          <AssociationSet Name="FK_destinatarios_planescontingencia" Association="Self.FK_destinatarios_planescontingencia">
+            <End Role="planescontingencia" EntitySet="planescontingencia" />
+            <End Role="destinatarios" EntitySet="destinatarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_escenario_condicion_condiciones" Association="Self.FK_escenario_condicion_condiciones">
+            <End Role="condiciones" EntitySet="condiciones" />
+            <End Role="escenario_condicion" EntitySet="escenario_condicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_escenario_condicion_escenarios" Association="Self.FK_escenario_condicion_escenarios">
+            <End Role="escenarios" EntitySet="escenarios" />
+            <End Role="escenario_condicion" EntitySet="escenario_condicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_escenario_escenarios" Association="Self.FK_plan_escenario_escenarios">
+            <End Role="escenarios" EntitySet="escenarios" />
+            <End Role="plan_escenario" EntitySet="plan_escenario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_escenario_planescontingencia" Association="Self.FK_plan_escenario_planescontingencia">
+            <End Role="planescontingencia" EntitySet="planescontingencia" />
+            <End Role="plan_escenario" EntitySet="plan_escenario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_instruccion_instrucciones" Association="Self.FK_plan_instruccion_instrucciones">
+            <End Role="instrucciones" EntitySet="instrucciones" />
+            <End Role="plan_instruccion" EntitySet="plan_instruccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_plan_instruccion_planescontingencia" Association="Self.FK_plan_instruccion_planescontingencia">
+            <End Role="planescontingencia" EntitySet="planescontingencia" />
+            <End Role="plan_instruccion" EntitySet="plan_instruccion" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="contingenciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="condicione">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="escenarios" Relationship="Self.escenario_condicion" FromRole="condiciones" ToRole="escenarios" />
+          <Property Name="descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="destinatario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <Property Name="id_planescontigencia" Type="Int32" />
+          <NavigationProperty Name="planescontingencia" Relationship="Self.FK_destinatarios_planescontingencia" FromRole="destinatarios" ToRole="planescontingencia" />
+          <NavigationProperty Name="personas" Relationship="Self.destinatario_persona" FromRole="destinatarios" ToRole="personas" />
+        </EntityType>
+        <EntityType Name="escenario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="condiciones" Relationship="Self.escenario_condicion" FromRole="escenarios" ToRole="condiciones" />
+          <NavigationProperty Name="planescontingencias" Relationship="Self.plan_escenario" FromRole="escenarios" ToRole="planescontingencia" />
+        </EntityType>
+        <EntityType Name="instruccione">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="planescontingencias" Relationship="Self.plan_instruccion" FromRole="instrucciones" ToRole="planescontingencia" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="razon_social" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="compañia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="destinatarios" Relationship="Self.destinatario_persona" FromRole="personas" ToRole="destinatarios" />
+        </EntityType>
+        <EntityType Name="planescontingencia">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="activo" Type="Boolean" />
+          <NavigationProperty Name="destinatarios" Relationship="Self.FK_destinatarios_planescontingencia" FromRole="planescontingencia" ToRole="destinatarios" />
+          <NavigationProperty Name="escenarios" Relationship="Self.plan_escenario" FromRole="planescontingencia" ToRole="escenarios" />
+          <NavigationProperty Name="instrucciones" Relationship="Self.plan_instruccion" FromRole="planescontingencia" ToRole="instrucciones" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_destinatarios_planescontingencia">
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="0..1" />
+          <End Role="destinatarios" Type="Self.destinatario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planescontingencia">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="destinatarios">
+              <PropertyRef Name="id_planescontigencia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="destinatario_persona">
+          <End Role="destinatarios" Type="Self.destinatario" Multiplicity="*" />
+          <End Role="personas" Type="Self.persona" Multiplicity="*" />
+        </Association>
+        <Association Name="escenario_condicion">
+          <End Role="condiciones" Type="Self.condicione" Multiplicity="*" />
+          <End Role="escenarios" Type="Self.escenario" Multiplicity="*" />
+        </Association>
+        <Association Name="plan_escenario">
+          <End Role="escenarios" Type="Self.escenario" Multiplicity="*" />
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="*" />
+        </Association>
+        <Association Name="plan_instruccion">
+          <End Role="instrucciones" Type="Self.instruccione" Multiplicity="*" />
+          <End Role="planescontingencia" Type="Self.planescontingencia" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="contingenciaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="condiciones" EntityType="Self.condicione" />
+          <EntitySet Name="destinatarios" EntityType="Self.destinatario" />
+          <EntitySet Name="escenarios" EntityType="Self.escenario" />
+          <EntitySet Name="instrucciones" EntityType="Self.instruccione" />
+          <EntitySet Name="personas" EntityType="Self.persona" />
+          <EntitySet Name="planescontingencias" EntityType="Self.planescontingencia" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <AssociationSet Name="FK_destinatarios_planescontingencia" Association="Self.FK_destinatarios_planescontingencia">
+            <End Role="planescontingencia" EntitySet="planescontingencias" />
+            <End Role="destinatarios" EntitySet="destinatarios" />
+          </AssociationSet>
+          <AssociationSet Name="destinatario_persona" Association="Self.destinatario_persona">
+            <End Role="destinatarios" EntitySet="destinatarios" />
+            <End Role="personas" EntitySet="personas" />
+          </AssociationSet>
+          <AssociationSet Name="escenario_condicion" Association="Self.escenario_condicion">
+            <End Role="condiciones" EntitySet="condiciones" />
+            <End Role="escenarios" EntitySet="escenarios" />
+          </AssociationSet>
+          <AssociationSet Name="plan_escenario" Association="Self.plan_escenario">
+            <End Role="escenarios" EntitySet="escenarios" />
+            <End Role="planescontingencia" EntitySet="planescontingencias" />
+          </AssociationSet>
+          <AssociationSet Name="plan_instruccion" Association="Self.plan_instruccion">
+            <End Role="instrucciones" EntitySet="instrucciones" />
+            <End Role="planescontingencia" EntitySet="planescontingencias" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="contingenciaModelStoreContainer" CdmEntityContainer="contingenciaEntities">
+          <EntitySetMapping Name="condiciones">
+            <EntityTypeMapping TypeName="contingenciaModel.condicione">
+              <MappingFragment StoreEntitySet="condiciones">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="destinatarios">
+            <EntityTypeMapping TypeName="contingenciaModel.destinatario">
+              <MappingFragment StoreEntitySet="destinatarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="id_planescontigencia" ColumnName="id_planescontigencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="escenarios">
+            <EntityTypeMapping TypeName="contingenciaModel.escenario">
+              <MappingFragment StoreEntitySet="escenarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="instrucciones">
+            <EntityTypeMapping TypeName="contingenciaModel.instruccione">
+              <MappingFragment StoreEntitySet="instrucciones">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="personas">
+            <EntityTypeMapping TypeName="contingenciaModel.persona">
+              <MappingFragment StoreEntitySet="personas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="razon_social" ColumnName="razon_social" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="compañia" ColumnName="compañia" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planescontingencias">
+            <EntityTypeMapping TypeName="contingenciaModel.planescontingencia">
+              <MappingFragment StoreEntitySet="planescontingencia">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="contingenciaModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="destinatario_persona" TypeName="contingenciaModel.destinatario_persona" StoreEntitySet="destinatario_persona">
+            <EndProperty Name="destinatarios">
+              <ScalarProperty Name="id" ColumnName="id_destinatarios" />
+            </EndProperty>
+            <EndProperty Name="personas">
+              <ScalarProperty Name="id" ColumnName="id_personas" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="escenario_condicion" TypeName="contingenciaModel.escenario_condicion" StoreEntitySet="escenario_condicion">
+            <EndProperty Name="condiciones">
+              <ScalarProperty Name="id" ColumnName="id_condiciones" />
+            </EndProperty>
+            <EndProperty Name="escenarios">
+              <ScalarProperty Name="id" ColumnName="id_escenarios" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="plan_escenario" TypeName="contingenciaModel.plan_escenario" StoreEntitySet="plan_escenario">
+            <EndProperty Name="escenarios">
+              <ScalarProperty Name="id" ColumnName="id_escenarios" />
+            </EndProperty>
+            <EndProperty Name="planescontingencia">
+              <ScalarProperty Name="id" ColumnName="id_planescontigencia" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="plan_instruccion" TypeName="contingenciaModel.plan_instruccion" StoreEntitySet="plan_instruccion">
+            <EndProperty Name="instrucciones">
+              <ScalarProperty Name="id" ColumnName="id_instrucciones" />
+            </EndProperty>
+            <EndProperty Name="planescontingencia">
+              <ScalarProperty Name="id" ColumnName="id_planescontigencia" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
