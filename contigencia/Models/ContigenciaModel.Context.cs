@@ -32,5 +32,9 @@ namespace contigencia.Models
         public virtual DbSet<persona> personas { get; set; }
         public virtual DbSet<planescontingencia> planescontingencias { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<escenario_condicion> escenario_condicion { get; set; }
+        public virtual DbSet<destinatario_persona> destinatario_persona { get; set; }
+        public virtual DbSet<plan_escenario> plan_escenario { get; set; }
+        public virtual DbSet<plan_instruccion> plan_instruccion { get; set; }
     }
 }

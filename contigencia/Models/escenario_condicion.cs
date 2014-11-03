@@ -12,18 +12,14 @@ namespace contigencia.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class condicione
+    public partial class escenario_condicion
     {
-        public condicione()
-        {
-            this.escenario_condicion = new HashSet<escenario_condicion>();
-        }
-    
-        public int id { get; set; }
-        public string nombre { get; set; }
+        public int id_escenarios { get; set; }
+        public int id_condiciones { get; set; }
         public bool activo { get; set; }
-        public string descripcion { get; set; }
+        public int id { get; set; }
     
-        public virtual ICollection<escenario_condicion> escenario_condicion { get; set; }
+        public virtual condicione condicione { get; set; }
+        public virtual escenario escenario { get; set; }
     }
 }

@@ -16,13 +16,13 @@ namespace contigencia.Models
     {
         public instruccione()
         {
-            this.planescontingencias = new HashSet<planescontingencia>();
+            this.plan_instruccion = new HashSet<plan_instruccion>();
         }
     
         public int id { get; set; }
         public string descripcion { get; set; }
         public Nullable<bool> activo { get; set; }
     
-        public virtual ICollection<planescontingencia> planescontingencias { get; set; }
+        public virtual ICollection<plan_instruccion> plan_instruccion { get; set; }
     }
 }

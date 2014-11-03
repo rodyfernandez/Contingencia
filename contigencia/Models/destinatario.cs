@@ -16,7 +16,7 @@ namespace contigencia.Models
     {
         public destinatario()
         {
-            this.personas = new HashSet<persona>();
+            this.destinatario_persona = new HashSet<destinatario_persona>();
         }
     
         public int id { get; set; }
@@ -26,6 +26,6 @@ namespace contigencia.Models
         public Nullable<int> id_planescontigencia { get; set; }
     
         public virtual planescontingencia planescontingencia { get; set; }
-        public virtual ICollection<persona> personas { get; set; }
+        public virtual ICollection<destinatario_persona> destinatario_persona { get; set; }
     }
 }

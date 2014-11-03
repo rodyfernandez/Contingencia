@@ -16,7 +16,7 @@ namespace contigencia.Models
     {
         public persona()
         {
-            this.destinatarios = new HashSet<destinatario>();
+            this.destinatario_persona = new HashSet<destinatario_persona>();
         }
     
         public int id { get; set; }
@@ -26,6 +26,6 @@ namespace contigencia.Models
         public string compañia { get; set; }
         public Nullable<bool> activo { get; set; }
     
-        public virtual ICollection<destinatario> destinatarios { get; set; }
+        public virtual ICollection<destinatario_persona> destinatario_persona { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace contigencia.Models
         public planescontingencia()
         {
             this.destinatarios = new HashSet<destinatario>();
-            this.escenarios = new HashSet<escenario>();
-            this.instrucciones = new HashSet<instruccione>();
+            this.plan_escenario = new HashSet<plan_escenario>();
+            this.plan_instruccion = new HashSet<plan_instruccion>();
         }
     
         public int id { get; set; }
@@ -26,7 +26,7 @@ namespace contigencia.Models
         public Nullable<bool> activo { get; set; }
     
         public virtual ICollection<destinatario> destinatarios { get; set; }
-        public virtual ICollection<escenario> escenarios { get; set; }
-        public virtual ICollection<instruccione> instrucciones { get; set; }
+        public virtual ICollection<plan_escenario> plan_escenario { get; set; }
+        public virtual ICollection<plan_instruccion> plan_instruccion { get; set; }
     }
 }

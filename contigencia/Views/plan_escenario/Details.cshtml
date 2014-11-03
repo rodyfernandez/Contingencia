@@ -1,0 +1,42 @@
+﻿@model contigencia.Models.plan_escenario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>plan_escenario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.orden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.orden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.escenario.nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.escenario.nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.planescontingencia.descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.planescontingencia.descripcion)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

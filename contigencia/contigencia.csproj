@@ -163,12 +163,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\condicionesController.cs" />
     <Compile Include="Controllers\destinatariosController.cs" />
+    <Compile Include="Controllers\destinatario_personaController.cs" />
     <Compile Include="Controllers\escenariosController.cs" />
+    <Compile Include="Controllers\escenario_condicionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\instruccionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\planescontingenciasController.cs" />
+    <Compile Include="Controllers\plan_escenarioController.cs" />
+    <Compile Include="Controllers\plan_instruccionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -194,7 +198,13 @@
     <Compile Include="Models\destinatario.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\destinatario_persona.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\escenario.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\escenario_condicion.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -206,6 +216,12 @@
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\planescontingencia.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plan_escenario.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\plan_instruccion.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
@@ -320,6 +336,26 @@
     <Content Include="Views\personas\Details.cshtml" />
     <Content Include="Views\personas\Edit.cshtml" />
     <Content Include="Views\personas\Index.cshtml" />
+    <Content Include="Views\escenario_condicion\Create.cshtml" />
+    <Content Include="Views\escenario_condicion\Delete.cshtml" />
+    <Content Include="Views\escenario_condicion\Details.cshtml" />
+    <Content Include="Views\escenario_condicion\Edit.cshtml" />
+    <Content Include="Views\escenario_condicion\Index.cshtml" />
+    <Content Include="Views\destinatario_persona\Create.cshtml" />
+    <Content Include="Views\destinatario_persona\Delete.cshtml" />
+    <Content Include="Views\destinatario_persona\Details.cshtml" />
+    <Content Include="Views\destinatario_persona\Edit.cshtml" />
+    <Content Include="Views\destinatario_persona\Index.cshtml" />
+    <Content Include="Views\plan_escenario\Create.cshtml" />
+    <Content Include="Views\plan_escenario\Delete.cshtml" />
+    <Content Include="Views\plan_escenario\Details.cshtml" />
+    <Content Include="Views\plan_escenario\Edit.cshtml" />
+    <Content Include="Views\plan_escenario\Index.cshtml" />
+    <Content Include="Views\plan_instruccion\Create.cshtml" />
+    <Content Include="Views\plan_instruccion\Delete.cshtml" />
+    <Content Include="Views\plan_instruccion\Details.cshtml" />
+    <Content Include="Views\plan_instruccion\Edit.cshtml" />
+    <Content Include="Views\plan_instruccion\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

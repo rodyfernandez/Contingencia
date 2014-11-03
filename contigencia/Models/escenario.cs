@@ -16,15 +16,15 @@ namespace contigencia.Models
     {
         public escenario()
         {
-            this.condiciones = new HashSet<condicione>();
-            this.planescontingencias = new HashSet<planescontingencia>();
+            this.escenario_condicion = new HashSet<escenario_condicion>();
+            this.plan_escenario = new HashSet<plan_escenario>();
         }
     
         public int id { get; set; }
         public string nombre { get; set; }
         public bool activo { get; set; }
     
-        public virtual ICollection<condicione> condiciones { get; set; }
-        public virtual ICollection<planescontingencia> planescontingencias { get; set; }
+        public virtual ICollection<escenario_condicion> escenario_condicion { get; set; }
+        public virtual ICollection<plan_escenario> plan_escenario { get; set; }
     }
 }
