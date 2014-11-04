@@ -12,12 +12,12 @@ namespace contigencia.Controllers
 {
     public class condicionesController : Controller
     {
-        private contingenciaEntities db = new contingenciaEntities();
+        private ContingenciaEntities db = new ContingenciaEntities();
 
         // GET: condiciones
         public ActionResult Index()
         {
-            return View(db.condiciones.ToList());
+            return View(db.Condiciones.ToList());
         }
 
         // GET: condiciones/Details/5
@@ -27,7 +27,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            condicione condicione = db.condiciones.Find(id);
+           Condicion condicione = db.Condiciones.Find(id);
             if (condicione == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nombre,activo,descripcion")] condicione condicione)
+        public ActionResult Create([Bind(Include = "id,nombre,activo,descripcion")] Condicion condicione)
         {
             if (ModelState.IsValid)
             {
-                db.condiciones.Add(condicione);
+                db.Condiciones.Add(condicione);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            condicione condicione = db.condiciones.Find(id);
+            Condicion condicione = db.Condiciones.Find(id);
             if (condicione == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nombre,activo,descripcion")] condicione condicione)
+        public ActionResult Edit([Bind(Include = "id,nombre,activo,descripcion")] Condicion condicione)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            condicione condicione = db.condiciones.Find(id);
+            Condicion condicione = db.Condiciones.Find(id);
             if (condicione == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace contigencia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            condicione condicione = db.condiciones.Find(id);
-            db.condiciones.Remove(condicione);
+            Condicion condicione = db.Condiciones.Find(id);
+            db.Condiciones.Remove(condicione);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

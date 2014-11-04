@@ -12,12 +12,12 @@ namespace contigencia.Controllers
 {
     public class personasController : Controller
     {
-        private contingenciaEntities db = new contingenciaEntities();
+        private ContingenciaEntities db = new ContingenciaEntities();
 
         // GET: personas
         public ActionResult Index()
         {
-            return View(db.personas.ToList());
+            return View(db.Personas.ToList());
         }
 
         // GET: personas/Details/5
@@ -27,7 +27,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = db.personas.Find(id);
+            Persona persona = db.Personas.Find(id);
             if (persona == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,razon_social,email,celular,compañia,activo")] persona persona)
+        public ActionResult Create([Bind(Include = "id,razon_social,email,celular,compañia,activo")] Persona persona)
         {
             if (ModelState.IsValid)
             {
-                db.personas.Add(persona);
+                db.Personas.Add(persona);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = db.personas.Find(id);
+            Persona persona = db.Personas.Find(id);
             if (persona == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,razon_social,email,celular,compañia,activo")] persona persona)
+        public ActionResult Edit([Bind(Include = "id,razon_social,email,celular,compañia,activo")] Persona persona)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            persona persona = db.personas.Find(id);
+            Persona persona = db.Personas.Find(id);
             if (persona == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace contigencia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            persona persona = db.personas.Find(id);
-            db.personas.Remove(persona);
+            Persona persona = db.Personas.Find(id);
+            db.Personas.Remove(persona);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

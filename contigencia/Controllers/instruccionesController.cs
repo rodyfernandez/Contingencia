@@ -12,12 +12,12 @@ namespace contigencia.Controllers
 {
     public class instruccionesController : Controller
     {
-        private contingenciaEntities db = new contingenciaEntities();
+        private ContingenciaEntities db = new ContingenciaEntities();
 
         // GET: instrucciones
         public ActionResult Index()
         {
-            return View(db.instrucciones.ToList());
+            return View(db.Instrucciones.ToList());
         }
 
         // GET: instrucciones/Details/5
@@ -27,7 +27,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            instruccione instruccione = db.instrucciones.Find(id);
+            Instruccion instruccione = db.Instrucciones.Find(id);
             if (instruccione == null)
             {
                 return HttpNotFound();
@@ -46,11 +46,11 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descripcion,activo")] instruccione instruccione)
+        public ActionResult Create([Bind(Include = "id,descripcion,activo")] Instruccion instruccione)
         {
             if (ModelState.IsValid)
             {
-                db.instrucciones.Add(instruccione);
+                db.Instrucciones.Add(instruccione);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +65,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            instruccione instruccione = db.instrucciones.Find(id);
+            Instruccion instruccione = db.Instrucciones.Find(id);
             if (instruccione == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descripcion,activo")] instruccione instruccione)
+        public ActionResult Edit([Bind(Include = "id,descripcion,activo")] Instruccion instruccione)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            instruccione instruccione = db.instrucciones.Find(id);
+            Instruccion instruccione = db.Instrucciones.Find(id);
             if (instruccione == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace contigencia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            instruccione instruccione = db.instrucciones.Find(id);
-            db.instrucciones.Remove(instruccione);
+            Instruccion instruccione = db.Instrucciones.Find(id);
+            db.Instrucciones.Remove(instruccione);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

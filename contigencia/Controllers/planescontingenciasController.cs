@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using contigencia.Models;
+using contigencia.Models.ViewModels;
 
 namespace contigencia.Controllers
 {
     public class planescontingenciasController : Controller
     {
-        private contingenciaEntities db = new contingenciaEntities();
+        private ContingenciaEntities db = new ContingenciaEntities();
 
         // GET: planescontingencias
         public ActionResult Index()
         {
-            return View(db.planescontingencias.ToList());
+            return View(db.PlanContingencias.ToList());
         }
 
         // GET: planescontingencias/Details/5
@@ -27,7 +28,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            planescontingencia planescontingencia = db.planescontingencias.Find(id);
+            PlanContingencia planescontingencia = db.PlanContingencias.Find(id);
             if (planescontingencia == null)
             {
                 return HttpNotFound();
@@ -46,11 +47,11 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,descripcion,activo")] planescontingencia planescontingencia)
+        public ActionResult Create([Bind(Include = "id,descripcion,activo")] PlanContingencia planescontingencia)
         {
             if (ModelState.IsValid)
             {
-                db.planescontingencias.Add(planescontingencia);
+                db.PlanContingencias.Add(planescontingencia);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -65,7 +66,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            planescontingencia planescontingencia = db.planescontingencias.Find(id);
+            PlanContingencia planescontingencia = db.PlanContingencias.Find(id);
             if (planescontingencia == null)
             {
                 return HttpNotFound();
@@ -78,7 +79,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,descripcion,activo")] planescontingencia planescontingencia)
+        public ActionResult Edit([Bind(Include = "id,descripcion,activo")] PlanContingencia planescontingencia)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +97,7 @@ namespace contigencia.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            planescontingencia planescontingencia = db.planescontingencias.Find(id);
+            PlanContingencia planescontingencia = db.PlanContingencias.Find(id);
             if (planescontingencia == null)
             {
                 return HttpNotFound();
@@ -109,11 +110,128 @@ namespace contigencia.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            planescontingencia planescontingencia = db.planescontingencias.Find(id);
-            db.planescontingencias.Remove(planescontingencia);
+            PlanContingencia planescontingencia = db.PlanContingencias.Find(id);
+            db.PlanContingencias.Remove(planescontingencia);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+
+
+
+        // GET: escenarios/AddEscenaries/5
+        public ActionResult AddEscenaries(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var planEscenarios = new PlanEscenariosViewModel()
+            {
+                plan = db.PlanContingencias.Include(i => i.Escenario).First(i => i.id == id)
+            };
+
+            if (planEscenarios.plan == null)
+                return HttpNotFound();
+
+            var allEscenarios = db.Escenarios.ToList();
+            planEscenarios.allEscenaries = allEscenarios.Select(o => new SelectListItem
+            {
+                Text = o.nombre,
+                Value = o.id.ToString()
+            });
+
+            return View(planEscenarios);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]//[Bind(Include = "id,nombre,activo")] 
+        public ActionResult AddEscenaries(PlanEscenariosViewModel planEscenarioVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var plan = db.PlanContingencias.Find(planEscenarioVM.plan.id);
+
+                if (plan != null)
+                {
+                    //primero borro todo y despues agrego
+                    plan.Escenario.Clear();
+
+                    foreach (int idEscenario in planEscenarioVM.SelectedEscenaries)
+                    {
+                        Escenario escenario = db.Escenarios.Find(idEscenario);
+
+                        plan.Escenario.Add(escenario);
+                    }
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(planEscenarioVM);
+        }
+
+
+
+        // GET: escenarios/AddInstructions/5
+        public ActionResult AddInstructions(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var planInstrucciones = new PlanInstruccionesViewModel()
+            {
+                plan = db.PlanContingencias.Include(i => i.Instruccion).First(i => i.id == id)
+            };
+
+            if (planInstrucciones.plan == null)
+                return HttpNotFound();
+
+            var allInstrucciones = db.Instrucciones.ToList();
+            planInstrucciones.allInstructions = allInstrucciones.Select(o => new SelectListItem
+            {
+                Text = o.descripcion,
+                Value = o.id.ToString()
+            });
+
+            return View(planInstrucciones);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]//[Bind(Include = "id,nombre,activo")] 
+        public ActionResult AddInstructions(PlanInstruccionesViewModel planInstruccionesVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var plan = db.PlanContingencias.Find(planInstruccionesVM.plan.id);
+
+                if (plan != null)
+                {
+                    //primero borro todo y despues agrego
+                    plan.Instruccion.Clear();
+
+                    foreach (int idInstruccion in planInstruccionesVM.SelectedInstructions)
+                    {
+                        Instruccion instruccion = db.Instrucciones.Find(idInstruccion);
+
+                        plan.Instruccion.Add(instruccion);
+                    }
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(planInstruccionesVM);
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

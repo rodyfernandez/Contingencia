@@ -46,11 +46,17 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Entity">
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -78,10 +84,6 @@
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.0\lib\net45\System.Web.Razor.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -163,21 +165,17 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\condicionesController.cs" />
     <Compile Include="Controllers\destinatariosController.cs" />
-    <Compile Include="Controllers\destinatario_personaController.cs" />
     <Compile Include="Controllers\escenariosController.cs" />
-    <Compile Include="Controllers\escenario_condicionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\instruccionesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\planescontingenciasController.cs" />
-    <Compile Include="Controllers\plan_escenarioController.cs" />
-    <Compile Include="Controllers\plan_instruccionController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\condicione.cs">
+    <Compile Include="Models\Condicion.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ContigenciaModel.Context.cs">
@@ -195,38 +193,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ContigenciaModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\destinatario.cs">
+    <Compile Include="Models\Destinatario.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\destinatario_persona.cs">
-      <DependentUpon>ContigenciaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\escenario.cs">
-      <DependentUpon>ContigenciaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\escenario_condicion.cs">
+    <Compile Include="Models\Escenario.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\instruccione.cs">
+    <Compile Include="Models\Instruccion.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\persona.cs">
+    <Compile Include="Models\Persona.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\planescontingencia.cs">
+    <Compile Include="Models\PlanContingencia.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\plan_escenario.cs">
-      <DependentUpon>ContigenciaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\plan_instruccion.cs">
-      <DependentUpon>ContigenciaModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>ContigenciaModel.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\ViewModels\DestinatarioPersonasViewModel.cs" />
+    <Compile Include="Models\ViewModels\PlanInstruccionesViewModel.cs" />
+    <Compile Include="Models\ViewModels\PlanEscenariosViewModel.cs" />
+    <Compile Include="Models\ViewModels\EscenarioCondicionesViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -239,6 +226,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="db\contingencia.7z" />
     <EntityDeploy Include="Models\ContigenciaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ContigenciaModel.Designer.cs</LastGenOutput>
@@ -256,7 +244,6 @@
       <DependentUpon>ContigenciaModel.edmx</DependentUpon>
       <LastGenOutput>ContigenciaModel.cs</LastGenOutput>
     </Content>
-    <Content Include="db\contingencia.7z" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -269,7 +256,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -337,26 +326,10 @@
     <Content Include="Views\personas\Details.cshtml" />
     <Content Include="Views\personas\Edit.cshtml" />
     <Content Include="Views\personas\Index.cshtml" />
-    <Content Include="Views\escenario_condicion\Create.cshtml" />
-    <Content Include="Views\escenario_condicion\Delete.cshtml" />
-    <Content Include="Views\escenario_condicion\Details.cshtml" />
-    <Content Include="Views\escenario_condicion\Edit.cshtml" />
-    <Content Include="Views\escenario_condicion\Index.cshtml" />
-    <Content Include="Views\destinatario_persona\Create.cshtml" />
-    <Content Include="Views\destinatario_persona\Delete.cshtml" />
-    <Content Include="Views\destinatario_persona\Details.cshtml" />
-    <Content Include="Views\destinatario_persona\Edit.cshtml" />
-    <Content Include="Views\destinatario_persona\Index.cshtml" />
-    <Content Include="Views\plan_escenario\Create.cshtml" />
-    <Content Include="Views\plan_escenario\Delete.cshtml" />
-    <Content Include="Views\plan_escenario\Details.cshtml" />
-    <Content Include="Views\plan_escenario\Edit.cshtml" />
-    <Content Include="Views\plan_escenario\Index.cshtml" />
-    <Content Include="Views\plan_instruccion\Create.cshtml" />
-    <Content Include="Views\plan_instruccion\Delete.cshtml" />
-    <Content Include="Views\plan_instruccion\Details.cshtml" />
-    <Content Include="Views\plan_instruccion\Edit.cshtml" />
-    <Content Include="Views\plan_instruccion\Index.cshtml" />
+    <Content Include="Views\escenarios\AddConditions.cshtml" />
+    <Content Include="Views\planescontingencias\AddEscenaries.cshtml" />
+    <Content Include="Views\planescontingencias\AddInstructions.cshtml" />
+    <Content Include="Views\destinatarios\AddPersons.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
