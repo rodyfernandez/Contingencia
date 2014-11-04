@@ -22,9 +22,24 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+
+
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Simulacion", "About", "Home")</li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administracion <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>@Html.ActionLink("Lista de Condiciones", "Index", "condiciones")</li>
+                            <li>@Html.ActionLink("Lista de Escenarios", "Index", "escenarios")</li>
+                            <li>@Html.ActionLink("Lista de Planes de Contigencia", "Index", "planescontingencias")</li>
+                            <li class="divider"></li>
+                            <li>@Html.ActionLink("Lista de Instrucciones", "Index", "instrucciones")</li>
+                            <li>@Html.ActionLink("Lista de Destinatarios", "Index", "destinatarios")</li>
+                            <li>@Html.ActionLink("Lista de Personas", "Index", "personas")</li>
+                        </ul>
+                    </li>
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Contingencia APP</p>
+            <p>&copy; @DateTime.Now.Year - Plan de Contingencia</p>
         </footer>
     </div>
 

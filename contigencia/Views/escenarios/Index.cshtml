@@ -1,12 +1,15 @@
-﻿@model IEnumerable<contigencia.Models.escenario>
+﻿
+@model IEnumerable<contigencia.Models.Escenario>
 
 @{
+
     ViewBag.Title = "Inicio";
 }
 
 <h2>Index</h2>
 
 <p>
+
     @Html.ActionLink("Crear", "Create")
 </p>
 <table class="table">
@@ -16,6 +19,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.activo)
+        </th>
+        <th>
+            Condiciones
         </th>
         <th></th>
     </tr>
@@ -28,10 +34,25 @@
         <td>
             @Html.DisplayFor(modelItem => item.activo)
         </td>
+
+        <td>
+
+            
+            @foreach (var condicion in item.Condicion)
+            {
+                        
+                        @condicion.nombre
+                <br />
+            
+            }
+            
+            @*@Html.ListBox("Id", new SelectList(item.Condicion, "id", "nombre"))*@
+        </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.id })
+            @Html.ActionLink("Borrar", "Delete", new { id=item.id }) |
+            @Html.ActionLink("Condiciones", "AddConditions", new { id = item.id })
         </td>
     </tr>
 }
