@@ -329,7 +329,7 @@
     <Content Include="Views\escenarios\AddConditions.cshtml" />
     <Content Include="Views\planescontingencias\AddEscenaries.cshtml" />
     <Content Include="Views\planescontingencias\AddInstructions.cshtml" />
-    <Content Include="Views\destinatarios\AddPersons.cshtml" />
+    <Content Include="Views\destinatarios\AddConditions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
