@@ -17,8 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.activo)
         </th>
-        <th>
+        <th colspan="2">
             Escenarios
+                        
         </th>
         <th>
             Instrucciones
@@ -34,11 +35,8 @@
         <td>
             @Html.DisplayFor(modelItem => item.activo)
         </td>
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.id })
-        <td>
+       
+        <td colspan="2">
 
             @foreach (var escenario in item.Escenario)
             {
@@ -49,20 +47,35 @@
             @*@Html.ListBox("Id", new SelectList(item.Condicion, "id", "nombre"))*@
         </td>
         <td>
-            @foreach (var instruccion in item.Instruccion)
-            {
-                @instruccion.descripcion
-                <br />
-            }
+            <ul>
+                @foreach (var instruccion in item.Instruccion)
+                    {
+                        <li>
+                            @instruccion.descripcion
+                        </li>
+                    }
+            </ul>
 
         </td>
         
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
+
+            <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">Acciones <span class="caret"></span></button>
+                <ul class="dropdown-menu">                    
+                    <li>@Html.ActionLink("Editar", "Edit", new { id=item.id })@*<i class="icon-pencil"></i>*@ </li>
+                    <li>@Html.ActionLink("Escenarios", "AddEscenaries", new { id = item.id })@*<i class="glyphicon-list-alt"></i>*@</li>
+                    <li>@Html.ActionLink("Instrucciones", "AddInstructions", new { id = item.id })</li>              
+                </ul>
+            </div>
+            @*Escenarios: glyphicon glyphicon-list-alt
+            Instruccion: glyphicon glyphicon-tasks*@
+
+            @*@Html.ActionLink("Editar", "Edit", new { id=item.id }) |
             @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
             @Html.ActionLink("Borrar", "Delete", new { id=item.id }) |
             @Html.ActionLink("Escenarios", "AddEscenaries", new { id = item.id }) |
-            @Html.ActionLink("Instrucciones", "AddInstructions", new { id = item.id })
+            @Html.ActionLink("Instrucciones", "AddInstructions", new { id = item.id })*@
         </td>
     </tr>
 }

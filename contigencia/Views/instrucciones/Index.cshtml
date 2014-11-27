@@ -4,7 +4,7 @@
     ViewBag.Title = "Inicio";
 }
 
-<h2>Index</h2>
+<h2>Instrucciones</h2>
 
 <p>
     @Html.ActionLink("Crear", "Create")
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.activo)
+            @Html.DisplayNameFor(model => model.Instructivo)
         </th>
         <th></th>
     </tr>
@@ -26,11 +26,14 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.activo)
+            @if (item.Instructivo != null && item.Instructivo.ToArray().Count() > 0)
+            {
+                @Html.Partial("_ShowFile", item)
+            }
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
+            @*@Html.ActionLink("Detalles", "Details", new { id=item.id }) |*@
             @Html.ActionLink("Borrar", "Delete", new { id=item.id })
         </td>
     </tr>

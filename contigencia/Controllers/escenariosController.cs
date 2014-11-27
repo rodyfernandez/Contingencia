@@ -39,6 +39,10 @@ namespace contigencia.Controllers
         // GET: escenarios/Create
         public ActionResult Create()
         {
+
+            ViewBag.NivelesRiesgo = db.NivelesDeRiesgo.OrderBy(e=>e.prioridad).ToList();
+            ViewBag.IdLevelRisk = -1;
+
             return View();
         }
 
@@ -47,7 +51,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nombre,activo")] Escenario escenario)
+        public ActionResult Create([Bind(Include = "id,nombre,activo, IdNivelDeRiesgo")] Escenario escenario)
         {
             if (ModelState.IsValid)
             {
@@ -55,7 +59,9 @@ namespace contigencia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            
+            ViewBag.NivelesRiesgo = db.NivelesDeRiesgo.OrderBy(e=>e.prioridad).ToList();
+            ViewBag.IdLevelRisk = escenario.IdNivelDeRiesgo;
             return View(escenario);
         }
 
@@ -73,6 +79,16 @@ namespace contigencia.Controllers
             {
                 return HttpNotFound();
             }
+
+
+           // ViewBag.IdNivelDeRiesgo = new SelectList(db.NivelesDeRiesgo, "id", "descripcion", escenario.IdNivelDeRiesgo);
+
+
+
+            ViewBag.NivelesRiesgo = db.NivelesDeRiesgo.OrderBy(e => e.prioridad).ToList();
+            ViewBag.IdLevelRisk = escenario.IdNivelDeRiesgo;
+
+            
             return View(escenario);
         }
 
@@ -81,7 +97,7 @@ namespace contigencia.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nombre,activo")] Escenario escenario)
+        public ActionResult Edit([Bind(Include = "id,nombre,activo, IdNivelDeRiesgo")] Escenario escenario)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +105,10 @@ namespace contigencia.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
+            ViewBag.NivelesRiesgo = db.NivelesDeRiesgo.OrderBy(e => e.prioridad).ToList();
+            ViewBag.IdLevelRisk = escenario.IdNivelDeRiesgo;
+            
             return View(escenario);
         }
 

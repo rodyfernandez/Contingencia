@@ -233,6 +233,18 @@ namespace contigencia.Controllers
 
 
 
+        // GET: planescontingencias
+        public ActionResult Simulation()
+        {
+            return View(db.Escenarios.Include(e => e.PlanContingencia).Include(e=> e.Condicion).ToList());
+        }
+
+        public ActionResult SimulacionManualPlanContigencia(int id)
+        {
+            return View(db.PlanContingencias.Find(id));
+        }
+        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

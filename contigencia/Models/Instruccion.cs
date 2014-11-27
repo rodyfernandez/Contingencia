@@ -22,6 +22,8 @@ namespace contigencia.Models
         public int id { get; set; }
         public string descripcion { get; set; }
         public Nullable<bool> activo { get; set; }
+        public byte[] Instructivo { get; set; }
+        public string InstructivoNombre { get; set; }
     
         public virtual ICollection<PlanContingencia> PlanContingencia { get; set; }
     }

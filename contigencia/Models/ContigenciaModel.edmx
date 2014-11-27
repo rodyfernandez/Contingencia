@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ContingenciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ContingenciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Condicion">
           <Key>
             <PropertyRef Name="id" />
@@ -39,6 +39,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="50" />
           <Property Name="activo" Type="bit" Nullable="false" />
+          <Property Name="IdNivelDeRiesgo" Type="int" />
         </EntityType>
         <EntityType Name="Escenario_Condicion">
           <Key>
@@ -55,6 +56,17 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="50" />
           <Property Name="activo" Type="bit" />
+          <Property Name="Instructivo" Type="varbinary(max)" />
+          <Property Name="InstructivoNombre" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="NivelesDeRiesgo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="color" Type="varchar" MaxLength="50" />
+          <Property Name="prioridad" Type="int" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -151,6 +163,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Escenario_NivelesDeRiesgo">
+          <End Role="NivelesDeRiesgo" Type="Self.NivelesDeRiesgo" Multiplicity="0..1" />
+          <End Role="Escenario" Type="Self.Escenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesDeRiesgo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Escenario">
+              <PropertyRef Name="IdNivelDeRiesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_plan_escenario_escenarios">
           <End Role="Escenario" Type="Self.Escenario" Multiplicity="1" />
           <End Role="Plan_Escenario" Type="Self.Plan_Escenario" Multiplicity="*" />
@@ -206,6 +230,7 @@
           <EntitySet Name="Escenario" EntityType="Self.Escenario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Escenario_Condicion" EntityType="Self.Escenario_Condicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Instruccion" EntityType="Self.Instruccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NivelesDeRiesgo" EntityType="Self.NivelesDeRiesgo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plan_Escenario" EntityType="Self.Plan_Escenario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Plan_Instruccion" EntityType="Self.Plan_Instruccion" Schema="dbo" store:Type="Tables" />
@@ -230,6 +255,10 @@
             <End Role="Escenario" EntitySet="Escenario" />
             <End Role="Escenario_Condicion" EntitySet="Escenario_Condicion" />
           </AssociationSet>
+          <AssociationSet Name="FK_Escenario_NivelesDeRiesgo" Association="Self.FK_Escenario_NivelesDeRiesgo">
+            <End Role="NivelesDeRiesgo" EntitySet="NivelesDeRiesgo" />
+            <End Role="Escenario" EntitySet="Escenario" />
+          </AssociationSet>
           <AssociationSet Name="FK_plan_escenario_escenarios" Association="Self.FK_plan_escenario_escenarios">
             <End Role="Escenario" EntitySet="Escenario" />
             <End Role="Plan_Escenario" EntitySet="Plan_Escenario" />
@@ -247,8 +276,7 @@
             <End Role="Plan_Instruccion" EntitySet="Plan_Instruccion" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ContingenciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -283,6 +311,8 @@
           <Property Name="activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Condicion" Relationship="Self.Escenario_Condicion" FromRole="Escenario" ToRole="Condicion" />
           <NavigationProperty Name="PlanContingencia" Relationship="Self.Plan_Escenario" FromRole="Escenario" ToRole="PlanContingencia" />
+          <Property Name="IdNivelDeRiesgo" Type="Int32" />
+          <NavigationProperty Name="NivelesDeRiesgo" Relationship="ContingenciaModel.FK_Escenario_NivelesDeRiesgo" FromRole="Escenario" ToRole="NivelesDeRiesgo" />
         </EntityType>
         <EntityType Name="Instruccion">
           <Key>
@@ -292,6 +322,8 @@
           <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="activo" Type="Boolean" />
           <NavigationProperty Name="PlanContingencia" Relationship="Self.Plan_Instruccion" FromRole="Instruccion" ToRole="PlanContingencia" />
+          <Property Name="Instructivo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="InstructivoNombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Persona">
           <Key>
@@ -371,7 +403,34 @@
             <End Role="Instruccion" EntitySet="Instrucciones" />
             <End Role="PlanContingencia" EntitySet="PlanContingencias" />
           </AssociationSet>
+          <EntitySet Name="NivelesDeRiesgo" EntityType="ContingenciaModel.NivelesDeRiesgo" />
+          <AssociationSet Name="FK_Escenario_NivelesDeRiesgo" Association="ContingenciaModel.FK_Escenario_NivelesDeRiesgo">
+            <End Role="NivelesDeRiesgo" EntitySet="NivelesDeRiesgo" />
+            <End Role="Escenario" EntitySet="Escenarios" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="NivelesDeRiesgo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Escenario" Relationship="ContingenciaModel.FK_Escenario_NivelesDeRiesgo" FromRole="NivelesDeRiesgo" ToRole="Escenario" />
+          <Property Name="prioridad" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Escenario_NivelesDeRiesgo">
+          <End Type="ContingenciaModel.NivelesDeRiesgo" Role="NivelesDeRiesgo" Multiplicity="0..1" />
+          <End Type="ContingenciaModel.Escenario" Role="Escenario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NivelesDeRiesgo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Escenario">
+              <PropertyRef Name="IdNivelDeRiesgo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -402,6 +461,7 @@
           <EntitySetMapping Name="Escenarios">
             <EntityTypeMapping TypeName="ContingenciaModel.Escenario">
               <MappingFragment StoreEntitySet="Escenario">
+                <ScalarProperty Name="IdNivelDeRiesgo" ColumnName="IdNivelDeRiesgo" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
@@ -411,6 +471,8 @@
           <EntitySetMapping Name="Instrucciones">
             <EntityTypeMapping TypeName="ContingenciaModel.Instruccion">
               <MappingFragment StoreEntitySet="Instruccion">
+                <ScalarProperty Name="InstructivoNombre" ColumnName="InstructivoNombre" />
+                <ScalarProperty Name="Instructivo" ColumnName="Instructivo" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
@@ -470,6 +532,16 @@
               <ScalarProperty Name="id" ColumnName="id_planescontigencia" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="NivelesDeRiesgo">
+            <EntityTypeMapping TypeName="ContingenciaModel.NivelesDeRiesgo">
+              <MappingFragment StoreEntitySet="NivelesDeRiesgo">
+                <ScalarProperty Name="prioridad" ColumnName="prioridad" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

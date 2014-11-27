@@ -18,10 +18,10 @@
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.activo)
+            Personas
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.planescontingencia.descripcion)
+            Personas
         </th>
         <th></th>
     </tr>
@@ -38,12 +38,19 @@
             @Html.DisplayFor(modelItem => item.activo)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.planescontingencia.descripcion)
+                 
+            @foreach (var persona in item.Persona)
+            {
+                @persona.razon_social
+                <br />
+            }        
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |
-            @Html.ActionLink("Borrar", "Delete", new { id=item.id })
+            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |            
+            @Html.ActionLink("Borrar", "Delete", new { id=item.id }) |
+            @Html.ActionLink("Personas", "AddPersons", new { id=item.id }) 
+            
         </td>
     </tr>
 }

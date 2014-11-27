@@ -8,6 +8,14 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+    <script src="https://rawgithub.com/buberdds/angular-bootstrap-colorpicker/master/js/bootstrap-colorpicker-module.js"></script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <link href="~/Content/colorpicker.css" rel="stylesheet" />
+
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -25,18 +33,21 @@
 
 
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Simulacion", "About", "Home")</li>
+                    <li>@Html.ActionLink("Simulacion", "Simulation", "planescontingencias")</li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administracion <span class="caret"></span></a>
                         <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("Lista de Condiciones", "Index", "condiciones")</li>
-                            <li>@Html.ActionLink("Lista de Escenarios", "Index", "escenarios")</li>
-                            <li>@Html.ActionLink("Lista de Planes de Contigencia", "Index", "planescontingencias")</li>
-                            <li class="divider"></li>
-                            <li>@Html.ActionLink("Lista de Instrucciones", "Index", "instrucciones")</li>
-                            <li>@Html.ActionLink("Lista de Destinatarios", "Index", "destinatarios")</li>
-                            <li>@Html.ActionLink("Lista de Personas", "Index", "personas")</li>
+
+                            <li>@Html.ActionLink("Niveles de Riesgo", "Index", "NivelesRiesgo")</li>
+                            <li>@Html.ActionLink("Condiciones de Escenarios", "Index", "condiciones")</li>
+                            <li>@Html.ActionLink("Instrucciones", "Index", "instrucciones")</li>
+                            <li>@Html.ActionLink("Destinatarios", "Index", "destinatarios")</li>
+                            <li>@Html.ActionLink("Personas", "Index", "personas")</li>
+                            
+                            <li class="divider"></li>                            
+                            <li>@Html.ActionLink("Escenarios", "Index", "escenarios")</li>
+                            <li>@Html.ActionLink("Planes de Contigencia", "Index", "planescontingencias")</li>                                                        
                         </ul>
                     </li>
 
@@ -55,6 +66,16 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    
+    
+
+    @*<script src="/Content/bootstrap-colorpicker-module.js"></script>*@
+
+
     @RenderSection("scripts", required: false)
+
+    
+
+
 </body>
 </html>

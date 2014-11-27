@@ -31,5 +31,6 @@ namespace contigencia.Models
         public virtual DbSet<Instruccion> Instrucciones { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<PlanContingencia> PlanContingencias { get; set; }
+        public virtual DbSet<NivelesDeRiesgo> NivelesDeRiesgo { get; set; }
     }
 }

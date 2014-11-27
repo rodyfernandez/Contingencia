@@ -168,7 +168,9 @@
     <Compile Include="Controllers\escenariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\instruccionesController.cs" />
+    <Compile Include="Controllers\JsonServicesController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NivelesRiesgoController.cs" />
     <Compile Include="Controllers\personasController.cs" />
     <Compile Include="Controllers\planescontingenciasController.cs" />
     <Compile Include="Global.asax.cs">
@@ -204,6 +206,9 @@
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NivelesDeRiesgo.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Persona.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
@@ -218,8 +223,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Attachment.jpeg" />
+    <Content Include="Content\attachment1.png" />
+    <Content Include="Content\bootstrap-colorpicker-module.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\colorpicker.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -261,11 +270,15 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -329,10 +342,23 @@
     <Content Include="Views\escenarios\AddConditions.cshtml" />
     <Content Include="Views\planescontingencias\AddEscenaries.cshtml" />
     <Content Include="Views\planescontingencias\AddInstructions.cshtml" />
-    <Content Include="Views\destinatarios\AddConditions.cshtml" />
+    <Content Include="Views\destinatarios\Prueba.cshtml" />
+    <Content Include="Views\destinatarios\AddPersons.cshtml" />
+    <Content Include="Views\planescontingencias\Simulation.cshtml" />
+    <Content Include="Views\NivelesRiesgo\Create.cshtml" />
+    <Content Include="Views\NivelesRiesgo\Delete.cshtml" />
+    <Content Include="Views\NivelesRiesgo\Details.cshtml" />
+    <Content Include="Views\NivelesRiesgo\Edit.cshtml" />
+    <Content Include="Views\NivelesRiesgo\Index.cshtml" />
+    <Content Include="Views\NivelesRiesgo\View1.cshtml" />
+    <Content Include="Views\escenarios\_NivelRiesgo.cshtml" />
+    <Content Include="Views\NivelesRiesgo\_Color.cshtml" />
+    <Content Include="Views\instrucciones\_ShowFile.cshtml" />
+    <Content Include="Views\planescontingencias\SimulacionManualPlanContigencia.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\JsonServices\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

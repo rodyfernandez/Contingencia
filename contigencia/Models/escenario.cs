@@ -23,8 +23,10 @@ namespace contigencia.Models
         public int id { get; set; }
         public string nombre { get; set; }
         public bool activo { get; set; }
+        public Nullable<int> IdNivelDeRiesgo { get; set; }
     
         public virtual ICollection<Condicion> Condicion { get; set; }
         public virtual ICollection<PlanContingencia> PlanContingencia { get; set; }
+        public virtual NivelesDeRiesgo NivelesDeRiesgo { get; set; }
     }
 }

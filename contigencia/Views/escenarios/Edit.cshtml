@@ -4,11 +4,12 @@
     ViewBag.Title = "Editar";
 }
 
-<h2>Edit</h2>
+<h2>Editar</h2>
 
 
 @using (Html.BeginForm())
 {
+    
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
@@ -34,18 +35,23 @@
                 </div>
             </div>
         </div>
+        @Html.Partial("_NivelRiesgo", Model)
+        
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Grabar" class="btn btn-primary" />
             </div>
         </div>
     </div>
+
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index")
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
