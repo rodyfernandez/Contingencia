@@ -1,0 +1,46 @@
+﻿@model contigencia.Models.Escenario
+
+<div class="form-group">
+
+
+    @Html.LabelFor(model => model.IdNivelDeRiesgo, "Nivel de Riesgo ", htmlAttributes: new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        <select name="IdNivelDeRiesgo" id="IdNivelDeRiesgo">
+            @{
+                <option value="-1">Elija un nivel de riesgo</option>
+
+                foreach (var item in ViewBag.NivelesRiesgo)
+                {
+                    if (item.id == ViewBag.IdLevelRisk)
+                    {
+                        <option value="@item.id" style="background-color:@item.color;" selected>@string.Format("{0}  ({1})",item.descripcion, item.prioridad)</option>
+                    }
+                    else
+                    {
+                        <option value="@item.id" style="background-color:@item.color;">@string.Format("{0}  ({1})", item.descripcion, item.prioridad)</option>
+                    }
+                }
+            }
+        </select>
+        
+        <span id="colorElegido" name="colorElegido">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+        @Html.ValidationMessageFor(model => model.IdNivelDeRiesgo, "", new { @class = "text-danger" })
+    </div>
+
+    <script language="javascript">
+
+        $("select").change(function () {
+            var color = "";
+            $("select option:selected").each(function () {
+                color += $(this).css('background-color') + " ";
+            });
+            $('#colorElegido').css('background-color', color);
+            //$(this).css('background-color', color);
+        }).change();
+
+    </script>
+</div>
+
+
+

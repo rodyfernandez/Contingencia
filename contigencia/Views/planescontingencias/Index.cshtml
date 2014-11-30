@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<contigencia.Models.PlanContingencia>
 
 @{
-    ViewBag.Title = "Inicio";
+    ViewBag.Title = "Planes de Contingencia";
 }
 
-<h2>Index</h2>
+<h2>Planes de Contigencia</h2>
 
 <p>
     @Html.ActionLink("Crear", "Create")
@@ -12,10 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.descripcion)
+            Descripcion
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.activo)
+            Activo
         </th>
         <th colspan="2">
             Escenarios
@@ -23,6 +23,9 @@
         </th>
         <th>
             Instrucciones
+        </th>
+        <th>
+            Destinatarios
         </th>
         <th></th>
     </tr>
@@ -33,7 +36,10 @@
             @Html.DisplayFor(modelItem => item.descripcion)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.activo)
+            @{ 
+                var activ = (item.activo!=null && item.activo ==true)  ? "Si" : "No";
+            } 
+            @activ
         </td>
        
         <td colspan="2">
@@ -57,7 +63,17 @@
             </ul>
 
         </td>
-        
+        <td>
+            <ul>
+                @foreach (var destinatario in item.Destinatario)
+                {
+                    <li>
+                        @destinatario.descripcion
+                    </li>
+                }
+            </ul>
+        </td>
+
         <td>
 
             <div class="btn-group">
@@ -66,6 +82,7 @@
                     <li>@Html.ActionLink("Editar", "Edit", new { id=item.id })@*<i class="icon-pencil"></i>*@ </li>
                     <li>@Html.ActionLink("Escenarios", "AddEscenaries", new { id = item.id })@*<i class="glyphicon-list-alt"></i>*@</li>
                     <li>@Html.ActionLink("Instrucciones", "AddInstructions", new { id = item.id })</li>              
+                    @*<li>@Html.ActionLink("Destinatarios", "AddDestinatarios", new { id = item.id } )</li>*@              
                 </ul>
             </div>
             @*Escenarios: glyphicon glyphicon-list-alt

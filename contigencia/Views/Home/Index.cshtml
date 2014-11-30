@@ -2,38 +2,141 @@
     ViewBag.Title = "Contingencia APP";
 }
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
 
+    $(document).ready(function () {
 
+        $('.carousel').carousel();
 
-
-<div class="jumbotron">
-
-
-
+        $('carousel').carousel({
+            interval: 500
+        });
+    });
     
-    <h1>Contingencia APP</h1>
     
+</script>
 
+
+<div class="jumbotron" style="background-color: #d9edf7;">
+    <h1>Bienvenido a Contingencia APP</h1>
 </div>
+    <table >
+        <tr>
+            <td align="left" valign="top"> 
+                
+                <div id=spMensaje class="alert alert-info">
+                    <b>Para comenzar a utilizar la aplicación registresé, y gestione sus planes de contingencia:</b>
+
+                    <hr />
+
+                    <ol>
+                        <li> <i><b>Registrese o identifíquese en el sitio </b></i></li>
+                        <li> <i><b>Gestione Niveles de Riesgo Para Escenarios </b></i></li>
+                        <li> <i><b>Gestione Condiciones para Escenarios de Riesgo</b></i></li>
+                        <li> <i><b>Gestione Escenarios de riesgo</b></i></li>
+                        <li> <i><b>Gestione Instrucciones</b></i></li>
+                        <li> <i><b>Gestione Destinatarios</b></i></li>
+                        <li> <i><b>Gestione Personas</b></i></li>
+                        <li> <i><b>Gestione Planes de contingencia </b></i></li>
+                        <li> <i><b>Realice una simulación </b></i></li>
+
+                    </ol>
+                                        
+                    <hr />
+                    
+                </div>                    
+        
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" style="width:450px;" >
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="3"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="4"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="5"></li>
+                        <li data-target="#carousel-example-generic" data-slide-to="6"></li>
+                    </ol>
+
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+
+                            <img src="~/Content/Riesgo1.jpg" />
+                            <div class="carousel-caption">
+                                
+                            </div>
+                        </div>
+
+                        <div class="item">
+
+                            <img src="~/Content/Riesgo3.jpg" />
+
+                            <div class="carousel-caption">
+                                ...
+                            </div>
+                        </div>
+                     
+
+                        <div class="item">
+
+                            <img src="~/Content/Riesgo5.jpg" />
+
+                            <div class="carousel-caption">
+                                ...
+                            </div>
+                        </div>
+
+                        <div class="item">
+
+                            <img src="~/Content/Riesgo7.jpg" />
+
+                            <div class="carousel-caption">
+
+                            </div>
+                        </div>
+
+                        <div class="item">
+
+                            <img src="~/Content/Riesgo6.jpg" />
+
+                            <div class="carousel-caption">
+
+                            </div>
+                        </div>
 
 
+                        <div class="item">
 
-<div class="row">
-    
-        <h2>Bienvenido Contingencia APP</h2>
-            <div>
-                <p>
-                    Para comenzar a utilizar la aplicación dirijase a la seccion de Administración, y gestione sus planes de contingencia.
-                </p>
-                <hr />
-                1) Cree Condiciones para escenarios
-                <br />
-                2) Cree Escenarios
-                <br />
-                ....
+                            <img src="~/Content/Riesgo4l.png" />
 
-    
+                            <div class="carousel-caption">
 
-    </div>
-  
-</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Anterior</span>
+                    </a>
+                    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Proximo</span>
+                    </a>
+                </div>
+
+            </td>
+
+        </tr>
+    </table>
+
+<br />
+
+

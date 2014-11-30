@@ -177,6 +177,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Common.cs" />
     <Compile Include="Models\Condicion.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
@@ -215,7 +216,11 @@
     <Compile Include="Models\PlanContingencia.cs">
       <DependentUpon>ContigenciaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PlanContingencia_Destinatario.cs">
+      <DependentUpon>ContigenciaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewModels\DestinatarioPersonasViewModel.cs" />
+    <Compile Include="Models\ViewModels\PlanDestinatariosViewModel.cs" />
     <Compile Include="Models\ViewModels\PlanInstruccionesViewModel.cs" />
     <Compile Include="Models\ViewModels\PlanEscenariosViewModel.cs" />
     <Compile Include="Models\ViewModels\EscenarioCondicionesViewModel.cs" />
@@ -227,8 +232,18 @@
     <Content Include="Content\attachment1.png" />
     <Content Include="Content\bootstrap-colorpicker-module.js" />
     <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.js" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.min.js" />
     <Content Include="Content\colorpicker.css" />
+    <Content Include="Content\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\npm.js" />
+    <Content Include="Content\Riesgo1.jpg" />
+    <Content Include="Content\Riesgo2.jpg" />
+    <Content Include="Content\Riesgo3.jpg" />
+    <Content Include="Content\Riesgo4l.png" />
+    <Content Include="Content\Riesgo6.jpg" />
+    <Content Include="Content\Riesgo7.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -253,6 +268,9 @@
       <DependentUpon>ContigenciaModel.edmx</DependentUpon>
       <LastGenOutput>ContigenciaModel.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\glyphicons-halflings-regular.woff" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -355,6 +373,7 @@
     <Content Include="Views\NivelesRiesgo\_Color.cshtml" />
     <Content Include="Views\instrucciones\_ShowFile.cshtml" />
     <Content Include="Views\planescontingencias\SimulacionManualPlanContigencia.cshtml" />
+    <Content Include="Views\planescontingencias\AddDestinatarios.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

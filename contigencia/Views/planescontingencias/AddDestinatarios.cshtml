@@ -1,18 +1,19 @@
-﻿@model contigencia.Models.ViewModels.PlanEscenariosViewModel
+﻿@model contigencia.Models.ViewModels.PlanDestinatariosViewModel
 
 @{
-    ViewBag.Title = "Agregar Escenarios";
+    ViewBag.Title = "Agregar Destintarios";
 }
 
-<h2>Agregar Escenarios</h2>
+<h2>Agregar Destinatarios</h2>
 
 
 @using (Html.BeginForm())
 {
+<link href="~/Content/Site.css" rel="stylesheet" />
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Plan De Contingencias - Escenarios</h4>
+        <h4>Plan De Contingencias - Destinatarios</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.plan.id)
@@ -26,12 +27,12 @@
         </div>
                        
         <div class="form-group">
-            @Html.LabelFor(model=>model.allEscenaries,"Escenarios",new {@class="control-label col-md-2"})
+            @Html.LabelFor(model=>model.allDestinatarios,"Destinatarios",new {@class="control-label col-md-2"})
             <div class="col-md-10">
-                @Html.ListBoxFor(m => m.SelectedEscenaries, Model.allEscenaries, new { @style = "width: 400px; height: 130px;" })
+                @Html.ListBoxFor(m => m.SelectedDestinatarios, Model.allDestinatarios, new { @style="width: 400px; height: 130px;" })
             </div>
         </div>        
-   
+        
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Grabar" class="btn btn-primary" />

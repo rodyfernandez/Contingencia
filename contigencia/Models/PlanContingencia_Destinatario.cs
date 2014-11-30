@@ -12,20 +12,9 @@ namespace contigencia.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Destinatario
+    public partial class PlanContingencia_Destinatario
     {
-        public Destinatario()
-        {
-            this.Persona = new HashSet<Persona>();
-        }
-    
-        public int id { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public bool activo { get; set; }
-        public Nullable<int> id_planescontigencia { get; set; }
-    
-        public virtual PlanContingencia PlanContingencia { get; set; }
-        public virtual ICollection<Persona> Persona { get; set; }
+        public int idDestinatario { get; set; }
+        public int idPlanContingencia { get; set; }
     }
 }

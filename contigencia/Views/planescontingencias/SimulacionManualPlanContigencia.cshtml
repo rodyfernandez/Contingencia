@@ -1,0 +1,138 @@
+﻿@model contigencia.Models.PlanContingencia
+
+<h1>@Model.descripcion</h1>
+
+
+
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#Escenario" data-toggle="tab">Escenario</a></li>
+    <li class=""><a href="#Instrucciones" data-toggle="tab">Instrucciones</a></li>
+    <li class=""><a href="#Destinatarios" data-toggle="tab">Destinatarios</a></li>
+</ul>
+
+<div class="tab-content">
+
+    <br />
+
+    <div class="tab-pane active" id="Escenario">
+        <fieldset class="form-horizontal">
+            <table class="table">
+                <tr>
+                    <th>
+                        Nombre
+                    </th>
+                    <th>
+                        Nivel Riesgo
+                    </th>
+                    <th>
+                        Condiciones
+                    </th>
+                </tr>
+                @{
+                    var escenario = Model.Escenario.Where(e => e.id == ViewBag.IdEscenario).FirstOrDefault();
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => escenario.nombre)
+                        </td>
+                      
+                        <td style="background-color:@escenario.NivelesDeRiesgo.color;">
+                            @string.Format("{0}  ({1})", escenario.NivelesDeRiesgo.descripcion, escenario.NivelesDeRiesgo.prioridad)
+                        </td>
+                        <td>
+                            <ul>
+                                @foreach (var condicion in escenario.Condicion)
+                                {
+                                    <li>
+                                        @condicion.nombre
+                                    </li>
+
+                                }
+                            </ul>
+                            @*@Html.ListBox("Id", new SelectList(item.Condicion, "id", "nombre"))*@
+                        </td>
+  
+                    </tr>
+                }
+            </table>
+
+        </fieldset>
+    </div>
+
+    <br />
+
+    <div class="tab-pane" id="Instrucciones">
+        <fieldset>
+
+            <ol>
+                @foreach (var instruccion in Model.Instruccion)
+                {
+                    <li>
+                        @instruccion.descripcion
+                        @Html.Partial("~/Views/instrucciones/_ShowFile.cshtml", instruccion)
+                    </li>
+                }
+            </ol>
+
+
+
+        </fieldset>
+    </div>
+    
+    <div class="tab-pane" id="Destinatarios">
+        <fieldset>
+
+            <ol>
+                @foreach (var destinatario in Model.Destinatario)
+                {
+                    <li>
+                        <b>
+                            @destinatario.descripcion
+                        </b>                        
+                        
+                        <br /> <br />
+
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Celular
+                                </th>
+                                <th>
+                                    Compañia
+                                </th>
+                             
+                                
+                            </tr>
+                            @foreach(var per in destinatario.Persona) {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => per.razon_social)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => per.email)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => per.celular)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => per.compañia)
+                                    </td>
+                                                                     
+                                </tr>
+                            }
+
+                            </table>
+
+
+                    </li>
+                }
+            </ol>
+
+        </fieldset>
+    </div>
+</div>

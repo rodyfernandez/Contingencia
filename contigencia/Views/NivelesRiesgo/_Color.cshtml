@@ -1,0 +1,86 @@
+﻿@model contigencia.Models.NivelesDeRiesgo
+
+<div class="form-group">
+    @Html.LabelFor(model => model.descripcion, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.descripcion)
+        @Html.ValidationMessageFor(model => model.descripcion)
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.color, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @*@Html.EditorFor(model => model.color)*@
+
+        @*<input type="text" name="color" id="color" value="{{ nonInput.color }}" >*@
+        <input colorpicker class="form-control" ng-model="hexPicker.color" type="text" name="color" id="color" style="background-color:{{ hexPicker.color }};" />
+
+
+        @Html.ValidationMessageFor(model => model.color)
+    </div>
+    <script language="javascript">
+
+        'use strict';
+
+        @*$("#color").css('background-color', '@Model.color');*@
+
+        angular.module('colorApp', ['colorpicker.module'])
+
+          .controller('MainCtrl', ['$scope', function ($scope) {
+
+              $scope.hexPicker = {
+                  color: '@ViewBag.Color',
+                  backgroundcolor: '@ViewBag.Color'
+              };
+
+              $scope.rgbPicker = {
+                  color: ''
+              };
+
+              $scope.rgbaPicker = {
+                  color: ''
+              };
+
+              $scope.nonInput = {
+                  color: ''
+              };
+
+              $scope.resetColor = function () {
+                  $scope.hexPicker = {
+                      color: '#ff0000'
+                  };
+              };
+
+              $scope.resetRBGColor = function () {
+                  $scope.rgbPicker = {
+                      color: 'rgb(255,255,255)'
+                  };
+              };
+
+              $scope.resetRBGAColor = function () {
+                  $scope.rgbaPicker = {
+                      color: 'rgb(255,255,255, 0.25)'
+                  };
+              };
+
+              $scope.resetNonInputColor = function () {
+                  $scope.nonInput = {
+                      color: '#ffffff'
+                  };
+              };
+
+          }]);
+
+    </script>
+
+
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.prioridad, new { @class = "control-label col-md-2" })
+    <div class="col-md-10">
+        @Html.EditorFor(model => model.prioridad)
+        @Html.ValidationMessageFor(model => model.prioridad)
+    </div>
+</div>

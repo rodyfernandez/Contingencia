@@ -12,21 +12,18 @@ namespace contigencia.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class PlanContingencia
+    public partial class NivelesDeRiesgo
     {
-        public PlanContingencia()
+        public NivelesDeRiesgo()
         {
             this.Escenario = new HashSet<Escenario>();
-            this.Instruccion = new HashSet<Instruccion>();
-            this.Destinatario = new HashSet<Destinatario>();
         }
     
         public int id { get; set; }
         public string descripcion { get; set; }
-        public bool activo { get; set; }
+        public string color { get; set; }
+        public Nullable<int> prioridad { get; set; }
     
         public virtual ICollection<Escenario> Escenario { get; set; }
-        public virtual ICollection<Instruccion> Instruccion { get; set; }
-        public virtual ICollection<Destinatario> Destinatario { get; set; }
     }
 }

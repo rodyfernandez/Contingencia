@@ -6,22 +6,23 @@
     <edmx:Diagrams>
       <Diagram DiagramId="3b7146c1341343a4a3edba6549a58c70" Name="Diagram1">
         <EntityTypeShape EntityType="ContingenciaModel.Condicion" Width="1.5" PointX="0.625" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ContingenciaModel.Destinatario" Width="1.75" PointX="8.875" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ContingenciaModel.Escenario" Width="1.5" PointX="3.25" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ContingenciaModel.Instruccion" Width="1.5" PointX="3.625" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ContingenciaModel.Persona" Width="1.5" PointX="11.75" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="ContingenciaModel.PlanContingencia" Width="1.5" PointX="6" PointY="1.375" IsExpanded="true" />
-        <AssociationConnector Association="ContingenciaModel.FK_destinatarios_planescontingencia" ManuallyRouted="false" />
-        <AssociationConnector Association="ContingenciaModel.Destinatario_Persona" ManuallyRouted="false" />
         <AssociationConnector Association="ContingenciaModel.Escenario_Condicion" ManuallyRouted="false" />
         <AssociationConnector Association="ContingenciaModel.Plan_Escenario" ManuallyRouted="false" />
         <AssociationConnector Association="ContingenciaModel.Plan_Instruccion" ManuallyRouted="true" >
           <ConnectorPoint PointX="5.125" PointY="5.3651432291666667" />
           <ConnectorPoint PointX="6.75" PointY="5.3651432291666667" />
-          <ConnectorPoint PointX="6.75" PointY="3.547587890625" />
+          <ConnectorPoint PointX="6.75" PointY="3.5475878906249996" />
         </AssociationConnector>
         <EntityTypeShape EntityType="ContingenciaModel.NivelesDeRiesgo" Width="1.5" PointX="0.75" PointY="0.875" />
         <AssociationConnector Association="ContingenciaModel.FK_Escenario_NivelesDeRiesgo" />
+        <EntityTypeShape EntityType="ContingenciaModel.Destinatario" Width="1.5" PointX="8.625" PointY="1.25" />
+        <EntityTypeShape EntityType="ContingenciaModel.PlanContingencia_Destinatario" Width="1.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="ContingenciaModel.FK_destinatarios_planescontingencia" />
+        <AssociationConnector Association="ContingenciaModel.Destinatario_Persona" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

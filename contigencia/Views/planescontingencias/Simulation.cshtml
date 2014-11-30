@@ -1,0 +1,74 @@
+﻿@model IEnumerable<contigencia.Models.Escenario>
+
+@{
+    ViewBag.Title = "Simulación";
+}
+
+
+<h2>Simulacion</h2>
+
+@*<p>
+    @Html.ActionLink("Nueva", "Create")
+</p>*@
+
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">Elija el plan de contingencia de un escenario</div>
+
+
+
+    <table class="table">
+        <tr>
+            <th>
+                Escenario
+            </th>
+            <th>Nivel Riesgo</th>
+            <th>Condiciones</th>
+            <th colspan="3">Plan de contingencia a aplicar</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>                
+
+                <td>
+                    @item.nombre
+                </td>
+
+                <td style="background-color:@item.NivelesDeRiesgo.color;">
+                    @string.Format("{0}  ({1})", item.NivelesDeRiesgo.descripcion, item.NivelesDeRiesgo.prioridad)
+                </td>
+
+                <td>
+                    <ul>
+                        @foreach (var condicion in item.Condicion)
+                        {
+                            <li>
+                                @string.Format("{0}: {1} ", condicion.nombre, condicion.descripcion)
+                            </li>
+                        }
+                    </ul>
+
+                </td>
+                <td colspan="3">
+                    <ul>
+                        @foreach (var plan in item.PlanContingencia)
+                        {
+                            <li>
+
+                                @Html.ActionLink(string.Format("Simular Plan: {0}", plan.descripcion), "SimulacionManualPlanContigencia", new { id = plan.id, idEscenario = item.id })
+
+                            </li>
+
+                        }
+                    </ul>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </table>
+</div>

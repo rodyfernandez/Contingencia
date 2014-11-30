@@ -28,7 +28,7 @@
         <div class="form-group">
             @Html.LabelFor(model=>model.allInstructions,"Escenarios",new {@class="control-label col-md-2"})
             <div class="col-md-10">
-                @Html.ListBoxFor(m => m.SelectedInstructions , Model.allInstructions)
+                @Html.ListBoxFor(m => m.SelectedInstructions, Model.allInstructions, new { @style = "width: 400px; height: 130px;" })
             </div>
         </div>        
    

@@ -1,0 +1,39 @@
+﻿@model contigencia.Models.NivelesDeRiesgo
+
+@{
+    ViewBag.Title = "Crear";
+}
+
+<h2>Crear</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container" ng-app='colorApp'>
+        <div ng-controller='MainCtrl'>
+            <div class="form-horizontal">
+                <h4>Niveles De Riesgo</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+
+                @Html.Partial("_Color", Model)
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Crear" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

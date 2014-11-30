@@ -1,0 +1,10 @@
+﻿@model contigencia.Models.Instruccion
+
+
+
+<a href="/instrucciones/DownloadInstructivo/@Html.Encode(Model.id)" title="@Model.InstructivoNombre">
+    @*<img src="http://placehold.it/130x130" alt="">*@
+    @*<image src='/instrucciones/ShowFile/@Html.Encode(Model.id)' alt="" />*@
+    <img src="~/Content/Attachment1.png" style="width:25px; height:20px;" alt="@Model.InstructivoNombre" />  
+    @Model.InstructivoNombre
+</a>

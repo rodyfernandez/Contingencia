@@ -26,11 +26,12 @@ namespace contigencia.Models
         }
     
         public virtual DbSet<Condicion> Condiciones { get; set; }
-        public virtual DbSet<Destinatario> Destinatarios { get; set; }
         public virtual DbSet<Escenario> Escenarios { get; set; }
         public virtual DbSet<Instruccion> Instrucciones { get; set; }
         public virtual DbSet<Persona> Personas { get; set; }
         public virtual DbSet<PlanContingencia> PlanContingencias { get; set; }
         public virtual DbSet<NivelesDeRiesgo> NivelesDeRiesgo { get; set; }
+        public virtual DbSet<Destinatario> Destinatarios { get; set; }
+        public virtual DbSet<PlanContingencia_Destinatario> PlanContingencia_Destinatario { get; set; }
     }
 }

@@ -174,6 +174,61 @@ namespace contigencia.Controllers
             return View(planEscenarioVM);
         }
 
+        // GET: escenarios/AddInstructions/5
+        public ActionResult AddDestinatarios(int? id)
+        {
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var planDestinatarios = new PlanDestinatariosViewModel()
+            {
+                plan = db.PlanContingencias.Include(i => i.Instruccion).First(i => i.id == id)
+            };
+
+            if (planDestinatarios.plan == null)
+                return HttpNotFound();
+
+            var allDestinatarios = db.Destinatarios.ToList();
+            planDestinatarios.allDestinatarios = allDestinatarios.Select(o => new SelectListItem
+            {
+                Text = o.descripcion,
+                Value = o.id.ToString()
+            });
+
+            return View(planDestinatarios);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]//[Bind(Include = "id,nombre,activo")] 
+        public ActionResult AddDestinatarios(PlanDestinatariosViewModel planDestinatariosVM)
+        {
+            if (ModelState.IsValid)
+            {
+
+                var plan = db.PlanContingencias.Find(planDestinatariosVM.plan.id);
+
+                if (plan != null)
+                {
+                    //primero borro todo y despues agrego
+                    plan.Destinatario.Clear();
+
+                    foreach (int idDestinatario in planDestinatariosVM.SelectedDestinatarios)
+                    {
+                        Destinatario destinatario = db.Destinatarios.Find(idDestinatario);
+
+                        plan.Destinatario.Add(destinatario);
+                    }
+                }
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(planDestinatariosVM);
+        }
+
 
 
         // GET: escenarios/AddInstructions/5
@@ -239,8 +294,9 @@ namespace contigencia.Controllers
             return View(db.Escenarios.Include(e => e.PlanContingencia).Include(e=> e.Condicion).ToList());
         }
 
-        public ActionResult SimulacionManualPlanContigencia(int id)
+        public ActionResult SimulacionManualPlanContigencia(int id, int idEscenario)
         {
+            ViewBag.IdEscenario = idEscenario;
             return View(db.PlanContingencias.Find(id));
         }
         

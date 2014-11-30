@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using contigencia;
+using contigencia.Models;
 namespace contigencia.Models.ViewModels
 {
     public class DestinatarioPersonasViewModel

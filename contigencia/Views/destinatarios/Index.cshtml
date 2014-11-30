@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.descripcion)
         </th>
         <th>
-            Personas
+            Activo
         </th>
         <th>
             Personas
@@ -38,12 +38,14 @@
             @Html.DisplayFor(modelItem => item.activo)
         </td>
         <td>
-                 
-            @foreach (var persona in item.Persona)
-            {
-                @persona.razon_social
-                <br />
-            }        
+            <ul>
+                @foreach (var persona in item.Persona)
+                    {
+                        <li>
+                            @persona.razon_social
+                        </li>
+                    }
+            </ul>     
         </td>
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
