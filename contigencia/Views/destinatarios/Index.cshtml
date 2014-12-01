@@ -4,7 +4,7 @@
     ViewBag.Title = "Inicio";
 }
 
-<h2>Index</h2>
+<h2>Destinatarios</h2>
 
 <p>
     @Html.ActionLink("Crear", "Create")
@@ -20,6 +20,7 @@
         <th>
             Activo
         </th>
+        <th>Plan de Contingencia</th>
         <th>
             Personas
         </th>
@@ -37,6 +38,12 @@
         <td>
             @Html.DisplayFor(modelItem => item.activo)
         </td>
+
+        <td>
+            
+            @item.PlanContingencia.descripcion
+
+        </td>
         <td>
             <ul>
                 @foreach (var persona in item.Persona)
@@ -48,8 +55,7 @@
             </ul>     
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Detalles", "Details", new { id=item.id }) |            
+            @Html.ActionLink("Editar", "Edit", new { id=item.id }) |                        
             @Html.ActionLink("Borrar", "Delete", new { id=item.id }) |
             @Html.ActionLink("Personas", "AddPersons", new { id=item.id }) 
             

@@ -297,8 +297,26 @@ namespace contigencia.Controllers
         public ActionResult SimulacionManualPlanContigencia(int id, int idEscenario)
         {
             ViewBag.IdEscenario = idEscenario;
+
+            Common mail = new Common();
+
+            var escenario = db.Escenarios.Find(idEscenario);
+            var plan = db.PlanContingencias.Find(id);
+
+            //Esto se hace para evitar que cuando se acceda por el link del mail que se disparen los mails nuevamente.
+            string url = HttpContext.Request.Url.AbsoluteUri.Replace("SimulacionManualPlanContigencia", "SimulacionViaMail");
+            mail.Send(plan, escenario, url);
             return View(db.PlanContingencias.Find(id));
         }
+
+        public ActionResult SimulacionViaMail(int id, int idEscenario)
+        {
+            ViewBag.IdEscenario = idEscenario;
+            
+            return View("SimulacionManualPlanContigencia", db.PlanContingencias.Find(id));
+        }
+
+
         
 
         protected override void Dispose(bool disposing)

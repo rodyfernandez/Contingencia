@@ -11,47 +11,63 @@ namespace contigencia.Models
     public class Common
     {
 
-        public void Send(Persona pers, PlanContingencia plan, Escenario escenario)
+        public void Send(PlanContingencia plan, Escenario escenario, string url)
         {
-            string usuarioMail = ConfigurationManager.AppSettings["MailUserName"];
-            string passwordMail = ConfigurationManager.AppSettings["MailPassword"];
-
+            //string usuarioMail = ConfigurationManager.AppSettings["MailUserName"];
+            //string passwordMail = ConfigurationManager.AppSettings["MailPassword"];
+                        
             System.Net.Mail.MailMessage mail = new System.Net.Mail.MailMessage();
-            mail.To.Add(pers.email);
-            mail.From = new MailAddress("PlanDeContingencia@gmail.com", "Plan Contingencia");
-            mail.Subject = string.Format("{0}, Alerta de Plan de Contingencia: {1}, Riesgo: {2}", pers.razon_social, plan.descripcion, escenario.NivelesDeRiesgo.descripcion);
+
+            foreach (var d in plan.Destinatario)
+            {
+                foreach (var pers in d.Persona)
+                {
+                    mail.To.Add(String.Format("{0} <{1}>",pers.razon_social, pers.email));                    
+                }
+            }
+
+
+            mail.From = new MailAddress("alerta@fdbrokers.com");
+            mail.Subject = string.Format("Alerta de Plan de Contingencia: {0}, Riesgo: {1}", plan.descripcion, escenario.NivelesDeRiesgo.descripcion);
             mail.SubjectEncoding = System.Text.Encoding.UTF8;
 
             //reemplazo el controlador actual por el nuevo controlador cuando el usuario confirme su mail
             //string urlConfirmacion = string.Format("{0}/{1}",HttpContext.Current.Request.Url.AbsoluteUri.Replace("Register","Bienvenido"),user.UsuarioEncriptado);
 
-            string urlConfirmacion = ""; // = string.Format("{0}://{1}/{2}/{3}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host, "Account/Bienvenido", user.UsuarioEncriptado);
+            //string urlConfirmacion = ""; // = string.Format("{0}://{1}/{2}/{3}", HttpContext.Current.Request.Url.Scheme, HttpContext.Current.Request.Url.Host, "Account/Bienvenido", user.UsuarioEncriptado);
 
             //http://localhost:60227/Account/Bienvenido/
 
             StringBuilder body = new StringBuilder();
 
-            body.Append("<b>ACTIVE SU CUENTA.</b> <br/><hr/> ");
-            body.Append("Gracias por registrarse en la escuela de futbol <b>Campus Crecer</b>. <br/><br/>");
-            body.Append("Para proceder con la activación de su cuenta, ingrese a la siguiente dirección: <br/><br/>");
-            body.Append(urlConfirmacion);
-            body.Append("<br/><br/>IMPORTANTE: Recuerde y proteja la información de su cuenta de acceso a Campus Crecer:<br/>");
-            body.Append("<br/><br/>Por favor, NO RESPONDA ESTE MENSAJE.<br/>");
+            body.Append("<b><font color='#FF0000'>ALERTA DE PLAN DE CONTINGENCIA </font></b> <br/><hr/> ");
+            body.Append(string.Format("<b>Escenario de Riesgo acontecido:</b> {0} <br/>", escenario.nombre));
+            body.Append(string.Format("<b>Nivel de Riesgo:</b>  {0} (Prioridad:{1})  <br/>", escenario.NivelesDeRiesgo.descripcion, escenario.NivelesDeRiesgo.prioridad, escenario.NivelesDeRiesgo.color));
+            body.Append(string.Format("<b>Plan de Contingencia a aplicar:</b> {0} <br/> <br/>", plan.descripcion));
+            body.Append("Para poder cumplimentar con el plan de contingencia por favor dirijase al siguiente link: <br/><br/>");
+            body.Append(url);            
+            body.Append("<br/><br/>Por favor, NO RESPONDA ESTE MENSAJE. <br/>");
             body.Append("Atentamente. <br/>");
-            body.Append("Campus Crecer.");
+            body.Append("Contingencia APP");
             mail.Body = body.ToString();
-
-            mail.BodyEncoding = System.Text.Encoding.UTF8;
+            //mail.BodyEncoding = System.Text.Encoding.UTF8;
             mail.IsBodyHtml = true;
-            mail.Priority = MailPriority.High;
+            //mail.Priority = MailPriority.High;
             SmtpClient client = new SmtpClient();
-            client.Host = ConfigurationManager.AppSettings["MailHost"];
-            if (client.DeliveryMethod != SmtpDeliveryMethod.SpecifiedPickupDirectory)
+            client.Host = "localhost";//ConfigurationManager.AppSettings["MailHost"];
+            //primero lo envio local
+            if (client.DeliveryMethod == SmtpDeliveryMethod.SpecifiedPickupDirectory)
             {
-                client.Credentials = new System.Net.NetworkCredential(usuarioMail, passwordMail);
-                client.Port = 587;
-                client.EnableSsl = true;
+                client.Send(mail);
             }
+            //if (client.DeliveryMethod != SmtpDeliveryMethod.SpecifiedPickupDirectory)
+            //{
+            client.UseDefaultCredentials = false;
+            client.Host = "mail.fdbrokers.com";
+            client.Credentials = new System.Net.NetworkCredential("alerta@fdbrokers.com", "Qwerty1234");                
+            client.Port = 587;
+            client.EnableSsl = false;
+            //}
             try
             {
                 client.Send(mail);
