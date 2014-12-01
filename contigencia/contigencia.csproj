@@ -271,7 +271,9 @@
     <Content Include="Content\glyphicons-halflings-regular.eot" />
     <Content Include="Content\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\contingencia azure.pubxml" />
     <None Include="Properties\PublishProfiles\contingencia.pubxml" />
+    <None Include="Properties\PublishProfiles\contingencias.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
