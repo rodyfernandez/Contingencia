@@ -36,10 +36,13 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Instructivo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @if (Model.Instructivo != null && Model.Instructivo.ToArray().Count() > 0)
-                {
-                    @Html.Partial("_ShowFile", Model)
-                }
+                @*@if (Model.Instructivo != null)
+                {                    
+                     @if (Model.Instructivo.ToArray().Count() > 0)
+                     {
+                         @Html.Partial("_ShowFile", Model)
+                     }
+                }*@
                 
                 <input type="file" name="fileInstructivo" style="width:100%" />
                 @Html.ValidationMessageFor(model => model.Instructivo, "", new { @class = "text-danger" })
