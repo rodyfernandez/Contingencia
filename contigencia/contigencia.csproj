@@ -244,13 +244,13 @@
     <Content Include="Content\Riesgo4l.png" />
     <Content Include="Content\Riesgo6.jpg" />
     <Content Include="Content\Riesgo7.jpg" />
+    <Content Include="Content\zocial.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="db\contingencia.7z" />
     <EntityDeploy Include="Models\ContigenciaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ContigenciaModel.Designer.cs</LastGenOutput>
@@ -271,6 +271,7 @@
     <Content Include="Content\glyphicons-halflings-regular.eot" />
     <Content Include="Content\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\glyphicons-halflings-regular.woff" />
+    <None Include="Properties\PublishProfiles\contingencia.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -360,7 +361,6 @@
     <Content Include="Views\escenarios\AddConditions.cshtml" />
     <Content Include="Views\planescontingencias\AddEscenaries.cshtml" />
     <Content Include="Views\planescontingencias\AddInstructions.cshtml" />
-    <Content Include="Views\destinatarios\Prueba.cshtml" />
     <Content Include="Views\destinatarios\AddPersons.cshtml" />
     <Content Include="Views\planescontingencias\Simulation.cshtml" />
     <Content Include="Views\NivelesRiesgo\Create.cshtml" />
@@ -368,7 +368,6 @@
     <Content Include="Views\NivelesRiesgo\Details.cshtml" />
     <Content Include="Views\NivelesRiesgo\Edit.cshtml" />
     <Content Include="Views\NivelesRiesgo\Index.cshtml" />
-    <Content Include="Views\NivelesRiesgo\View1.cshtml" />
     <Content Include="Views\escenarios\_NivelRiesgo.cshtml" />
     <Content Include="Views\NivelesRiesgo\_Color.cshtml" />
     <Content Include="Views\instrucciones\_ShowFile.cshtml" />

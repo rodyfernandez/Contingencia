@@ -58,11 +58,11 @@ namespace contigencia
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "318292134455-qvr4264vkmepv0m9em057qtekhpdhrbj.apps.googleusercontent.com",
+                ClientSecret = "RZ0o9OwBVFSh8pW9UInrsG8U"
+            });
         }
     }
 }
